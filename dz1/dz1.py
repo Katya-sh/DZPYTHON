@@ -99,7 +99,7 @@ def main():
             for numrow in origin_file:
                 print(origin_file[i])
                 i += 1
-            row = int(input("Введите строку которую нужно скопировать: "))
+            row = int(input("Введите номер строки которую нужно скопировать: "))
             copy_file(row)
 
 main()
