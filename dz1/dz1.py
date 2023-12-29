@@ -62,7 +62,20 @@ def write_file(file_name):
         f_writer = DictWriter(data, fieldnames=['имя', 'фамилия', 'телефон'])
         f_writer.writeheader()
         f_writer.writerows(res)
-
+def copy_file(row):
+    copy_name = 'copyrow.csv'
+    create_file(copy_name)
+    origin_file = read_file(file_name)
+    res = read_file(copy_name)
+    if row > len(origin_file):
+        print("Такой строки нет")
+        return
+    obj = origin_file[row-1]
+    res.append(obj)
+    with open(copy_name, 'w', encoding='utf-8', newline='') as data:
+        f_writer = DictWriter(data, fieldnames=['имя', 'фамилия', 'телефон'])
+        f_writer.writeheader()
+        f_writer.writerows(res)
 
 
 file_name = 'phone.csv'
@@ -81,6 +94,12 @@ def main():
                 continue
             print(*read_file(file_name))
         elif command == 'c':
-            pass
+            origin_file = read_file(file_name)
+            i = 0
+            for numrow in origin_file:
+                print(origin_file[i])
+                i += 1
+            row = int(input("Введите строку которую нужно скопировать: "))
+            copy_file(row)
 
 main()
